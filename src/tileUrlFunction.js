@@ -1,5 +1,6 @@
 //@flow
-import ol from 'openlayers';
+import { createXYZ } from 'ol/tilegrid';
+
 import { zeroPad, modulo } from './util';
 import { calculateTileRangeForZ, getTileRangeHeight } from './tileRange';
 
@@ -26,7 +27,7 @@ const EPSG3857_EXTENT = [
  * @static
  * @public
  */
-export function createTileUrlFunction(url, tileGrid = ol.tilegrid.createXYZ(), extent = EPSG3857_EXTENT) {
+export function createTileUrlFunction(url, tileGrid = createXYZ(), extent = EPSG3857_EXTENT) {
     return createTileUrlFunctionFromTemplates(expandUrl(url), tileGrid, extent);
 }
 
@@ -39,7 +40,7 @@ export function createTileUrlFunction(url, tileGrid = ol.tilegrid.createXYZ(), e
  * @returns {ol.TileUrlFunctionType}
  * @private
  */
-export function createTileUrlFunctionFromTemplate(template, tileGrid = ol.tilegrid.createXYZ(), extent = EPSG3857_EXTENT) {
+export function createTileUrlFunctionFromTemplate(template, tileGrid = createXYZ(), extent = EPSG3857_EXTENT) {
     return (
         /**
          * @param {ol.TileCoord} tileCoord Tile Coordinate.
@@ -76,7 +77,7 @@ export function createTileUrlFunctionFromTemplate(template, tileGrid = ol.tilegr
  * @returns {ol.TileUrlFunctionType}
  * @private
  */
-export function createTileUrlFunctionFromTemplates(templates, tileGrid = ol.tilegrid.createXYZ(), extent = EPSG3857_EXTENT) {
+export function createTileUrlFunctionFromTemplates(templates, tileGrid = createXYZ(), extent = EPSG3857_EXTENT) {
     return createTileUrlFunctionFromTileUrlFunctions(
         templates.map(tileUrlFunction => createTileUrlFunctionFromTemplate(tileUrlFunction, tileGrid, extent))
     );
