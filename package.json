@@ -3,6 +3,7 @@
   "version": "1.2.3",
   "description": "OpenLayer 3 tile url function to load tile seeded with TileCache url scheme",
   "main": "dist/bundle.js",
+  "module": "src/index.js",
   "scripts": {
     "release": "webpack --release --verbose",
     "build": "webpack --build --verbose",
